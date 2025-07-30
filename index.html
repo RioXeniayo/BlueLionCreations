@@ -11,86 +11,216 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Using the Inter font family */
+        /* New color palette from user */
+        :root {
+            --slate-dark: #2d3748;      /* For main background */
+            --slate-medium: #1b1f27;    /* For hover backgrounds & top bar */
+            --slate-vdark: #252a35;     /* For panels, buttons, dropdown */
+            --slate-light: #a0aec0;     /* For default link text */
+            --slate-lighter: #e2e8f0;   /* For brand text and active links */
+            --accent-blue: #63b3ed;     /* For highlights and icons */
+        }
+
+        /* Base styles for the page */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--slate-dark);
+            color: var(--slate-light);
         }
-        /* Custom colors to match the sketch more closely */
-        .bg-custom-dark { background-color: #2d2a4c; } /* Darkest background */
-        .bg-custom-medium { background-color: #4f4c7a; } /* Panels and Nav */
-        .bg-custom-light { background-color: #6a679e; } /* Title bar */
-        .text-custom-light { color: #e0e0e0; }
+
+        /* Updated Nav Button Style */
+        .nav-button {
+            background-color: var(--slate-vdark);
+            color: var(--slate-lighter);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-button:hover {
+            background-color: var(--slate-medium);
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        
+        /* Panel Styling */
+        .content-panel {
+            background-color: var(--slate-vdark);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        /* Dropdown Menu Styling */
+        .dropdown-menu {
+            background-color: var(--slate-vdark);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--slate-medium);
+            color: var(--slate-lighter);
+        }
     </style>
 </head>
-<body class="bg-custom-dark text-custom-light antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
-    <!-- Main container for the entire layout -->
-    <div class="flex flex-col md:flex-row min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="p-4 w-full shrink-0 shadow-lg" style="background-color: var(--slate-medium);">
+        <div class="flex justify-between items-center">
+            <!-- Left side of Nav -->
+            <div class="flex items-center space-x-6">
+                <h1 class="font-bold text-2xl" style="color: var(--slate-lighter);">Title</h1>
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="nav-button">HOME</a>
+                    <a href="#" class="nav-button">GALLERY</a>
+                    
+                    <!-- Styles Dropdown -->
+                    <div class="relative dropdown-container">
+                        <button class="nav-button dropdown-toggle">
+                            <span>STYLES</span>
+                            <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        </button>
+                        <div class="dropdown-menu absolute mt-2 w-48 rounded-md shadow-lg py-1 hidden">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">Style Option 1</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">Style Option 2</a>
+                        </div>
+                    </div>
 
-        <!-- Left Navigation Sidebar -->
-        <nav class="w-full md:w-48 bg-custom-medium p-4 flex flex-col shrink-0">
-            <!-- Hamburger menu icon for visual flair -->
-            <div class="mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-custom-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <!-- Prices Dropdown -->
+                    <div class="relative dropdown-container">
+                        <button class="nav-button dropdown-toggle">
+                            <span>PRICES</span>
+                            <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        </button>
+                        <div class="dropdown-menu absolute mt-2 w-48 rounded-md shadow-lg py-1 hidden">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">Pricing Tier A</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">Pricing Tier B</a>
+                        </div>
+                    </div>
+
+                    <!-- Queue Dropdown -->
+                    <div class="relative dropdown-container">
+                        <button class="nav-button dropdown-toggle">
+                            <span>QUEUE</span>
+                            <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        </button>
+                        <div class="dropdown-menu absolute mt-2 w-48 rounded-md shadow-lg py-1 hidden">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">View Queue</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-light">Status</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- Hamburger button for mobile -->
+            <button id="menu-button" class="md:hidden p-2 rounded-md hover:bg-white/10 focus:outline-none">
+                <svg class="h-6 w-6" style="color: var(--accent-blue);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
+            </button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden mt-4 space-y-1">
+            <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-lighter">HOME</a>
+            <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-lighter">GALLERY</a>
+            <!-- Mobile Dropdown for Styles -->
+            <div class="mobile-dropdown-container">
+                <button class="w-full text-left py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-lighter dropdown-toggle">STYLES</button>
+                <div class="pl-4 mt-1 space-y-1 hidden">
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">Style Option 1</a>
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">Style Option 2</a>
+                </div>
             </div>
-            
-            <!-- Main navigation links -->
-            <div class="flex-grow space-y-2">
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">HOME</a>
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">GALLERY</a>
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">STYLES</a>
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">PRICES</a>
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">QUEUE</a>
+            <!-- Mobile Dropdown for Prices -->
+            <div class="mobile-dropdown-container">
+                <button class="w-full text-left py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-lighter dropdown-toggle">PRICES</button>
+                <div class="pl-4 mt-1 space-y-1 hidden">
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">Pricing Tier A</a>
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">Pricing Tier B</a>
+                </div>
             </div>
-
-            <!-- Bottom navigation link -->
-            <div>
-                <a href="#" class="block py-2 px-3 rounded-md hover:bg-custom-light hover:text-white transition-colors duration-200">TERMS</a>
+            <!-- Mobile Dropdown for Queue -->
+            <div class="mobile-dropdown-container">
+                <button class="w-full text-left py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-lighter dropdown-toggle">QUEUE</button>
+                <div class="pl-4 mt-1 space-y-1 hidden">
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">View Queue</a>
+                    <a href="#" class="block py-2 px-3 rounded-md hover:bg-slate-vdark text-slate-light">Status</a>
+                </div>
             </div>
         </nav>
+    </header>
 
-        <!-- Main Content Area -->
-        <main class="flex-grow p-4 md:p-8">
-            <!-- Header Title Bar -->
-            <header class="bg-custom-light text-white font-bold text-2xl text-center p-4 rounded-lg shadow-md mb-8">
-                Title
-            </header>
-
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <!-- Image Block -->
-                <div class="bg-custom-medium p-6 rounded-lg shadow-lg flex items-center justify-center">
-                    <img src="https://placehold.co/400x300/4f4c7a/e0e0e0?text=Image" 
-                         alt="Placeholder Image" 
-                         class="rounded-md max-w-full h-auto"
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/000000?text=Image+Not+Found';">
-                </div>
-
-                <!-- Top Text Block -->
-                <div class="bg-custom-medium p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-semibold mb-3">Section Title</h2>
-                    <p class="text-custom-light leading-relaxed">
-                        This is the primary text area next to the image. You can describe the image here or place any other relevant content. It's designed to be a flexible space.
-                    </p>
-                </div>
-
-                <!-- Bottom Text Block (Spans two columns on larger screens) -->
-                <div class="bg-custom-medium p-6 rounded-lg shadow-lg lg:col-span-2">
-                    <h2 class="text-xl font-semibold mb-3">Additional Information</h2>
-                    <p class="text-custom-light leading-relaxed mb-4">
-                        This larger text block spans the full width of the content area, providing ample space for more detailed information, articles, or descriptions. The layout uses CSS Grid, which allows this element to seamlessly take up two columns while the elements above it share the space.
-                    </p>
-                    <p class="text-custom-light leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
-                    </p>
-                </div>
-
+    <!-- Main Content Area -->
+    <main class="flex-grow p-4 md:p-8">
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="content-panel p-6 rounded-lg flex items-center justify-center">
+                <img src="https://placehold.co/400x300/252a35/e2e8f0?text=Image" alt="Placeholder Image" class="rounded-md max-w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/000000?text=Image+Not+Found';">
             </div>
-        </main>
+            <div class="content-panel p-6 rounded-lg">
+                <h2 class="text-xl font-semibold mb-3" style="color: var(--slate-lighter);">Section Title</h2>
+                <p class="leading-relaxed">This is the primary text area next to the image. You can describe the image here or place any other relevant content. It's designed to be a flexible space.</p>
+            </div>
+            <div class="content-panel p-6 rounded-lg lg:col-span-2">
+                <h2 class="text-xl font-semibold mb-3" style="color: var(--slate-lighter);">Additional Information</h2>
+                <p class="leading-relaxed mb-4">This larger text block spans the full width of the content area, providing ample space for more detailed information, articles, or descriptions.</p>
+                <p class="leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+            </div>
+        </div>
+    </main>
 
-    </div>
+    <!-- JavaScript for Menus -->
+    <script>
+        // --- Main Mobile Menu Toggle ---
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Dropdown Menu Logic ---
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', event => {
+                event.stopPropagation();
+                const dropdownMenu = toggle.nextElementSibling;
+                
+                // Close all other open dropdowns first
+                closeAllDropdowns(toggle);
+
+                dropdownMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Function to close all dropdowns, except the one passed as an argument
+        function closeAllDropdowns(exceptThisToggle = null) {
+            document.querySelectorAll('.dropdown-container').forEach(container => {
+                const toggle = container.querySelector('.dropdown-toggle');
+                if (toggle !== exceptThisToggle) {
+                    container.querySelector('.dropdown-menu').classList.add('hidden');
+                }
+            });
+             document.querySelectorAll('.mobile-dropdown-container').forEach(container => {
+                const toggle = container.querySelector('.dropdown-toggle');
+                if (toggle !== exceptThisToggle) {
+                    toggle.nextElementSibling.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- Click outside to close dropdowns ---
+        window.addEventListener('click', () => {
+            closeAllDropdowns();
+        });
+    </script>
+
 </body>
 </html>
